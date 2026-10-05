@@ -15,10 +15,10 @@ while IFS= read -r p; do
   if [ "${p%/}" != "$p" ]; then
     rm -rf "${dst:?}/$p"
     mkdir -p "$dst/$p"
-    cp -a "$src/$p." "$dst/$p"
+    cp -R "$src/$p." "$dst/$p"
   else
     mkdir -p "$(dirname "$dst/$p")"
-    cp -a "$src/$p" "$dst/$p"
+    cp -R "$src/$p" "$dst/$p"
   fi
   echo "  framework  $p"
 done < <(entries framework-files)
@@ -28,7 +28,7 @@ while IFS= read -r p; do
     echo "  kept       $p"
   else
     mkdir -p "$(dirname "$dst/$p")"
-    cp -a "$src/$p" "$dst/$p"
+    cp -R "$src/$p" "$dst/$p"
     echo "  created    $p"
   fi
 done < <(entries user-files)
