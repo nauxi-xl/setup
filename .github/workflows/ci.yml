@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: shellcheck -e SC2329 dev .github/smoke.sh .box/runtime/bin/*
+      - run: shellcheck dev .github/smoke.sh .box/runtime/bin/*
 
   smoke:
     runs-on: ubuntu-latest
