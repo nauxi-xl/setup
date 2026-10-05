@@ -5,3 +5,4 @@ mcp.json
 .envrc
 .env.example
 .gitignore
+.claude/skills/

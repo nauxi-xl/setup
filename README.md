@@ -40,6 +40,7 @@ Ngoài ra có `connect` (đăng ký lại MCP và hooks) và `memory up|down|res
   Codex và Antigravity không tự expand `${VAR}`, nên secret được ghi thẳng vào config của chúng (nằm trong `DEVENV_HOME`, không nằm trong repo).
 - **`.env`** (tạo từ `.env.example`): API key, `GITHUB_TOKEN`, `ENABLE_SSH`, `DEVENV_HOME`, `BOX_PROJECT`.
 - `.envrc`, `.gitignore`
+- **`.claude/skills/`**: bộ skill cho Claude Code. `init`/`update` chỉ copy khi project chưa có thư mục này, nên skill bạn thêm riêng cho project không bị xoá.
 
 Các file còn lại là **framework**, danh sách nằm trong `.box/framework-files`. Lệnh `./dev update` sẽ ghi đè các file này.
 
