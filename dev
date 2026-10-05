@@ -2,6 +2,9 @@
 # FRAMEWORK FILE. Host CLI for the devbox (PowerShell twin: dev.ps1).
 # Kept thin on purpose: it resolves paths, writes .box/.env and drives
 # docker. Everything else runs inside the container (/opt/box/bin).
+# cmd_* run indirectly via "cmd_$cmd"; shellcheck <0.11 (the ubuntu-24.04
+# runner's) flags that as SC2317, 0.11+ as SC2329 (excluded in CI).
+# shellcheck disable=SC2317
 set -euo pipefail
 
 # Git Bash: pass container paths (/workspace, /src) through untouched.
@@ -33,7 +36,7 @@ die() { echo "dev: $*" >&2; exit 1; }
 info() { echo "[dev] $*"; }
 
 # Reads KEY from .env without sourcing it.
-env_get() { [ -f "$ROOT/.env" ] && sed -n "s/^$1=//p" "$ROOT/.env" | tail -n1 | tr -d '\r' || true; }
+env_get() { [ -f "$ROOT/.env" ] || return 0; sed -n "s/^$1=//p" "$ROOT/.env" | tail -n1 | tr -d '\r'; }
 
 slug() { echo "$1" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9_-]/-/g; s/^-*//'; }
 
